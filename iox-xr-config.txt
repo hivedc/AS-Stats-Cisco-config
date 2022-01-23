@@ -1,0 +1,38 @@
+#IOS XR won't let you use 2 different monitors on a single port like IOS XE lets you do. This is why you'll see part of our RTBH config as well.
+
+
+flow exporter-map as-stats-exporter
+ version v9
+ !
+ transport udp 9000
+ source Loopback0
+ destination X.X.X.X
+!
+flow monitor-map IPV4-FMM
+ record ipv4
+ exporter FNM-EM
+ exporter as-stats-exporter
+ cache entries 200000
+ cache timeout active 30
+ cache timeout inactive 30
+!
+flow monitor-map IPV6-FMM
+ record ipv6
+ exporter FNM-EM
+ exporter as-stats-exporter
+ cache entries 200000
+ cache timeout active 30
+ cache timeout inactive 30
+!
+!
+sampler-map SM
+ random 1 out-of 1024
+ 
+ interface Bundle-Ether1.98
+ mtu 1518
+ flow ipv4 monitor IPV4-FMM sampler sampler ingress
+ flow ipv4 monitor IPV4-FMM sampler sampler egress
+ flow ipv6 monitor IPV6-FMM sampler sampler ingress
+ flow ipv6 monitor IPV6-FMM sampler sampler egress
+ encapsulation dot1q 98
+
