@@ -30,7 +30,7 @@ flow record ASSTATS-RECORD-V6
  
  flow exporter ASSTATS-EXPORT
  description exporter ASSTATS
- destination 170.39.197.6
+ destination X.X.X.X
  source Loopback0
  transport udp 9000
  option exporter-stats timeout 1000
