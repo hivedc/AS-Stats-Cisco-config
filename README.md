@@ -1,2 +1,4 @@
 # AS-Stats-Cisco-config
-Our netflow exporter config on Cisco
+
+Looking to deploy AS-Stats (https://github.com/manuelkasper/AS-Stats) with Cisco routers?
+Here is our config on IOS XE and IOS XR
